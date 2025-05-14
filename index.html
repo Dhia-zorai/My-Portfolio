@@ -51,12 +51,8 @@
       }
 
       section {
-        transition: opacity 0.3s ease;
-        opacity: 0;
-      }
-
-      section.visible {
         opacity: 1;
+        transition: opacity 0.3s ease;
       }
 
       h1 {
@@ -118,7 +114,6 @@
         display: flex;
         gap: 2rem;
         align-items: center;
-
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
         border-radius: 2rem;
