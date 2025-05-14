@@ -325,11 +325,11 @@
       }
 
       .project-card {
-        background: var(--card-bg);
         border-radius: 1rem;
         padding: 1.5rem;
         transition: transform 0.15s ease, background 0.15s ease;
-        height: 27rem;
+        border: 1px solid var(--text);
+        height: auto;
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -496,12 +496,13 @@
       }
 
       .project-links {
-        position: absolute;
-        bottom: 1rem;
-        left: 1rem;
+        position: relative;
+        bottom: 0;
+        left: 0;
         display: flex;
         gap: 0.5rem;
         z-index: 2;
+        margin-top: 1rem; 
       }
 
       .tags {
@@ -519,17 +520,22 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: #2d2d2d;
-        color: #ffffff;
-        border-radius: 50%;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 1rem;
+        background: var(--card-bg);
+        color: var(--text);
+        border-radius: 0.5rem;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease;
+        transition: transform 0.2s ease, background 0.2s ease;
+        font-size: 0.9rem;
+        text-decoration: none;
       }
 
       .project-links a:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
+        background: var(--accent);
+        color: var(--bg);
       }
 
       .tags span {
@@ -651,6 +657,48 @@
         src: url("path-to-font.woff2") format("woff2");
         font-display: swap;
       }
+
+      .education-section {
+        padding: 4rem 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+      }
+
+      .education-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .education-circle {
+        width: 50px;
+        height: 50px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bg);
+        font-weight: bold;
+      }
+
+      .education-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .education-year {
+        font-size: 1rem;
+        color: var(--text);
+      }
+
+      .education-grade {
+        font-size: 0.9rem;
+        color: var(--gray);
+      }
     </style>
   </head>
 
@@ -699,7 +747,7 @@
           repositories, covering what I've built and what I'm working on.
         </p>
       </div>
-      <img class="me" src="proj1.png" alt="me" loading="lazy" />
+      <img class="me" src="me.png" alt="me" loading="lazy" />
     </section>
     <!-- About Section -->
     <section class="about">
@@ -840,19 +888,10 @@
         </div>
         <div class="project-links">
           <a href="https://github.com/Dhia-zorai/Weather-App" target="_blank">
-            <svg>
-              <image
-                class="linklogo"
-                href="github-mark-white.svg"
-                x="0"
-                y="0"
-              />
-            </svg>
+            <i id="naviconsmobile" class="fa-brands fa-github"></i>GitHub
           </a>
           <a href="https://dhia-zorai.github.io/Weather-App/" target="_blank">
-            <svg>
-              <image class="linklogo" href="internet.svg" x="0" y="0" />
-            </svg>
+            <i id="naviconsmobile" class="fa-solid fa-globe"></i>Website
           </a>
         </div>
       </div>
@@ -872,20 +911,32 @@
         </div>
         <div class="project-links">
           <a href="https://github.com/Dhia-zorai/Time-App" target="_blank">
-            <svg>
-              <image
-                class="linklogo"
-                href="github-mark-white.svg"
-                x="0"
-                y="0"
-              />
-            </svg>
+            <i id="naviconsmobile" class="fa-brands fa-github"></i>GitHub
           </a>
           <a href="https://dhia-zorai.github.io/Time-App" target="_blank">
-            <svg>
-              <image class="linklogo" href="internet.svg" x="0" y="0" />
-            </svg>
+            <i id="naviconsmobile" class="fa-solid fa-globe"></i>Website
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section">
+      <h2>Education</h2>
+
+      <div class="education-item">
+        <div class="education-circle">2025</div>
+        <div class="education-details">
+          <span class="education-year">Started University</span>
+          <span class="education-grade">Diploma: Computer Science</span>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <div class="education-circle">2024</div>
+        <div class="education-details">
+          <span class="education-year">Finished High School</span>
+          <span class="education-grade">Diploma : BAC</span>
         </div>
       </div>
     </section>
