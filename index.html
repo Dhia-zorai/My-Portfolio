@@ -37,8 +37,8 @@
       }
 
       html {
-        scroll-behavior: smooth; /* Enable smooth scrolling */
-        overscroll-behavior: contain; /* Prevent scroll chaining */
+        scroll-behavior: smooth;
+        overscroll-behavior: contain;
       }
 
       body {
@@ -47,19 +47,16 @@
         color: var(--text);
         line-height: 1.6;
         overflow-x: hidden;
-        scroll-snap-type: y mandatory; /* Snap to sections vertically */
+        scroll-snap-type: none; /
       }
 
       section {
-        scroll-snap-align: start; /* Align sections to the top */
-        transition: transform 0.5s ease, opacity 0.5s ease; /* Add smooth effects */
-        opacity: 0; /* Start with hidden sections */
-        transform: translateY(50px); /* Start with sections slightly below */
+        transition: opacity 0.3s ease;
+        opacity: 0;
       }
 
       section.visible {
-        opacity: 1; /* Fade in visible sections */
-        transform: translateY(0); /* Move sections into place */
+        opacity: 1;
       }
 
       h1 {
@@ -275,7 +272,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        backdrop-filter: blur(10px); /* Add blur effect */
+        backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
 
@@ -308,8 +305,7 @@
         background: var(--card-bg);
         border-radius: 1rem;
         padding: 1.5rem;
-        transition: transform 0.3s ease, background 0.3s ease,
-          box-shadow 0.3s ease;
+        transition: transform 0.2s ease, background 0.2s ease; /* Reduce animation duration */
         height: 25rem;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -520,7 +516,7 @@
         padding: 0.5rem 1rem;
         border-radius: 2rem;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
       }
 
       .filter-btn:hover {
@@ -884,7 +880,7 @@
           nav.classList.remove("scrolled");
         }
 
-        // Fade-in effect for sections
+        // Fade-in effect
         const sections = document.querySelectorAll("section");
         sections.forEach((section) => {
           const rect = section.getBoundingClientRect();
@@ -975,7 +971,7 @@
         updateVisibleProjects();
       });
 
-      // Initialize projects
+      // projects
       updateVisibleProjects();
     </script>
   </body>
