@@ -52,12 +52,34 @@
         color: var(--text);
         line-height: 1.6;
         overflow-x: hidden;
+        overflow-y: scroll;
         scroll-snap-type: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      @media (pointer: fine) {
+        body {
+          scroll-behavior: smooth;
+          overscroll-behavior: contain;
+        }
+      }
+
+      @media (pointer: fine) {
+        body {
+          scroll-behavior: smooth;
+          overscroll-behavior: contain;
+        }
       }
 
       section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      section.visible {
         opacity: 1;
-        transition: opacity 0.2s ease-in-out;
+        transform: translateY(0);
       }
 
       h1 {
@@ -327,12 +349,17 @@
       .project-card {
         border-radius: 1rem;
         padding: 1.5rem;
-        transition: transform 0.15s ease, background 0.15s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid var(--text);
         height: auto;
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .project-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       }
 
       /* Interactive Elements */
@@ -502,7 +529,7 @@
         display: flex;
         gap: 0.5rem;
         z-index: 2;
-        margin-top: 1rem; 
+        margin-top: 1rem;
       }
 
       .tags {
