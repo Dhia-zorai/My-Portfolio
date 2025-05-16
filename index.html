@@ -74,9 +74,10 @@
       section {
         opacity: 0;
         transform: translateY(50px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        transition: opacity 0.3s ease,
+          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity, transform;
       }
-
       section.visible {
         opacity: 1;
         transform: translateY(0);
@@ -105,11 +106,6 @@
 
       body.light-mode p {
         color: #333;
-      }
-
-      .linklogo {
-        height: 20px;
-        width: 20px;
       }
 
       i {
@@ -316,9 +312,11 @@
         text-align: center;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+          box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        will-change: opacity, transform;
       }
 
       .skill-item:hover {
@@ -347,20 +345,118 @@
       }
 
       .project-card {
+        background: var(--card-bg);
+        z-index: 1;
+        overflow: visible;
+        position: relative;
         border-radius: 1rem;
         padding: 1.5rem;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid var(--text);
-        height: auto;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: none;
+        cursor: default;
       }
 
       .project-card:hover {
         transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       }
+
+      .project-card-wrapper {
+        position: relative;
+        border-radius: 1.15rem;
+        padding: 4px;
+        background: conic-gradient(
+          from var(--angle),
+          transparent 10%,
+          red,
+          blue
+        );
+        animation: spin 3s linear infinite;
+        margin-bottom: 2rem;
+      }
+
+      .project-card-wrapper > .project-card {
+        position: relative;
+        z-index: 1;
+        background: var(--card-bg);
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .project-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+
+      .project-links {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        gap: 0.5rem;
+        z-index: 2;
+        margin-top: 1rem;
+      }
+
+      .tags {
+        margin-top: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-links a {
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 0.75rem;
+        background: var(--card-bg);
+        color: var(--text);
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, background 0.2s ease;
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: var(--accent);
+        display: flex;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .project-links a:hover {
+        transform: scale(1.05);
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .tags span {
+        display: inline-block;
+        padding: 0.25rem 0.25rem;
+        background: var(--gray);
+        color: var(--text);
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        margin-right: 0.25rem;
+      }
+
+
+      @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+
+      @keyframes spin {
+        from {
+          --angle: 0deg;
+        }
+        to {
+          --angle: 360deg;
+        }
+      }
+
 
       /* Interactive Elements */
       .show-more {
@@ -418,7 +514,7 @@
         display: grid;
         gap: 2rem;
       }
-
+      /*Contact me section*/
       .contact {
         display: flex;
         flex-wrap: wrap;
@@ -499,90 +595,13 @@
           align-items: center;
         }
       }
-
+      /*Currently learning*/
       .learning-section {
         padding: 4rem 5%;
       }
 
       /* Project Cards */
-      .project-card {
-        position: relative;
-        overflow: hidden;
-        cursor: default;
-      }
-
-      .project-card a {
-        cursor: pointer;
-      }
-
-      .project-image {
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-        border-radius: 0.5rem 0.5rem 0 0;
-      }
-
-      .project-links {
-        position: relative;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        gap: 0.5rem;
-        z-index: 2;
-        margin-top: 1rem;
-      }
-
-      .tags {
-        margin-top: 1rem;
-        position: relative;
-        z-index: 1;
-      }
-
-      .project-links svg {
-        width: 24px;
-        height: 24px;
-      }
-
-      .project-links a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: auto;
-        height: auto;
-        padding: 0.5rem 1rem;
-        background: var(--card-bg);
-        color: var(--text);
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s ease, background 0.2s ease;
-        font-size: 0.9rem;
-        text-decoration: none;
-      }
-
-      .project-links a:hover {
-        transform: scale(1.05);
-        background: var(--accent);
-        color: var(--bg);
-      }
-
-      .tags span {
-        display: inline-block;
-        padding: 0.25rem 0.25rem;
-        background: var(--gray);
-        color: var(--text);
-        border-radius: 0.25rem;
-        font-size: 0.75rem;
-        margin-right: 0.25rem;
-      }
-
-      .project-links a {
-        color: var(--accent);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
+      
       /* Category Filters */
       .project-filters {
         display: flex;
@@ -614,13 +633,6 @@
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
         margin-top: 2rem;
-      }
-
-      .learning-item {
-        background: var(--card-bg);
-        padding: 1rem;
-        border-radius: 0.5rem;
-        text-align: center;
       }
 
       @media (max-width: 768px) {
@@ -679,12 +691,8 @@
         transform: scale(1.1);
       }
 
-      @font-face {
-        font-family: "Inter";
-        src: url("path-to-font.woff2") format("woff2");
-        font-display: swap;
-      }
-
+      /*My education*/
+      
       .education-section {
         padding: 4rem 5%;
         display: flex;
@@ -774,7 +782,7 @@
           repositories, covering what I've built and what I'm working on.
         </p>
       </div>
-      <img class="me" src="me.png" alt="me" loading="lazy" />
+      <img class="me" src="resources/me.webp" alt="me" loading="lazy" />
     </section>
     <!-- About Section -->
     <section class="about">
@@ -899,50 +907,54 @@
 
     <section class="projects-grid" id="projects">
       <!-- Project Card 1 -->
-      <div class="project-card" data-category="web">
-        <div
-          class="project-image"
-          style="background-image: url('proj1.png')"
-          loading="lazy"
-        ></div>
-        <h3>Weather App</h3>
-        <p>Real time weather data</p>
-        <div class="tags">
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>JavaScript</span>
-          <span>OpenWeather API</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Dhia-zorai/Weather-App" target="_blank">
-            <i id="naviconsmobile" class="fa-brands fa-github"></i>GitHub
-          </a>
-          <a href="https://dhia-zorai.github.io/Weather-App/" target="_blank">
-            <i id="naviconsmobile" class="fa-solid fa-globe"></i>Website
-          </a>
+      <div class="project-card-wrapper">
+        <div class="project-card" data-category="web">
+          <div
+            class="project-image"
+            style="background-image: url('resources/proj1.webp')"
+            loading="lazy"
+          ></div>
+          <h3>Weather App</h3>
+          <p>Real time weather data</p>
+          <div class="tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>OpenWeather API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Dhia-zorai/Weather-App" target="_blank">
+              <i id="naviconsmobile" class="fa-brands fa-github"></i>GitHub
+            </a>
+            <a href="https://dhia-zorai.github.io/Weather-App/" target="_blank">
+              <i id="naviconsmobile" class="fa-solid fa-globe"></i>Website
+            </a>
+          </div>
         </div>
       </div>
       <!-- Project Card 2 -->
-      <div class="project-card" data-category="web">
-        <div
-          class="project-image"
-          style="background-image: url('proj2.png')"
-          loading="lazy"
-        ></div>
-        <h3>Current Time App</h3>
-        <p>Accurate current time</p>
-        <div class="tags">
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/Dhia-zorai/Time-App" target="_blank">
-            <i id="naviconsmobile" class="fa-brands fa-github"></i>GitHub
-          </a>
-          <a href="https://dhia-zorai.github.io/Time-App" target="_blank">
-            <i id="naviconsmobile" class="fa-solid fa-globe"></i>Website
-          </a>
+      <div class="project-card-wrapper">
+        <div class="project-card" data-category="web">
+          <div
+            class="project-image"
+            style="background-image: url('resources/proj2.webp')"
+            loading="lazy"
+          ></div>
+          <h3>Current Time App</h3>
+          <p>Accurate current time</p>
+          <div class="tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Dhia-zorai/Time-App" target="_blank">
+              <i id="naviconsmobile" class="fa-brands fa-github"></i>GitHub
+            </a>
+            <a href="https://dhia-zorai.github.io/Time-App" target="_blank">
+              <i id="naviconsmobile" class="fa-solid fa-globe"></i>Website
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1008,15 +1020,9 @@
     </footer>
 
     <script>
-      window.addEventListener("scroll", () => {
-        const nav = document.querySelector(".desktop-nav");
-        if (window.scrollY > 50) {
-          nav.classList.add("scrolled");
-        } else {
-          nav.classList.remove("scrolled");
-        }
-
-        // Fade-in effect
+      // Fade-in effect on scroll and initial load
+      let ticking = false;
+      function revealSections() {
         const sections = document.querySelectorAll("section");
         sections.forEach((section) => {
           const rect = section.getBoundingClientRect();
@@ -1024,6 +1030,25 @@
             section.classList.add("visible");
           }
         });
+      }
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const nav = document.querySelector(".desktop-nav");
+            if (window.scrollY > 50) {
+              nav.classList.add("scrolled");
+            } else {
+              nav.classList.remove("scrolled");
+            }
+            revealSections();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      window.addEventListener("scroll", onScroll);
+      document.addEventListener("DOMContentLoaded", () => {
+        revealSections();
       });
 
       // Dark Mode Toggle
@@ -1057,7 +1082,7 @@
         // Lazy load non-critical resources
         const styles = document.createElement("link");
         styles.rel = "stylesheet";
-        styles.href = "fonts.css"; // Load fonts after initial paint
+        styles.href = "fonts.css";
         document.head.appendChild(styles);
       });
 
