@@ -364,7 +364,7 @@
       .project-card-wrapper {
         position: relative;
         border-radius: 1.15rem;
-        padding: 4px;
+        padding: 3px;
         background: conic-gradient(
           from var(--angle),
           transparent 10%,
@@ -373,6 +373,11 @@
         );
         animation: spin 3s linear infinite;
         margin-bottom: 2rem;
+      }
+
+      .project-card-wrapper::before,.project-card-wrapper::after{
+        filter: blur(1.5rem);
+        opacity: 0.5;
       }
 
       .project-card-wrapper > .project-card {
@@ -441,7 +446,6 @@
         margin-right: 0.25rem;
       }
 
-
       @property --angle {
         syntax: "<angle>";
         initial-value: 0deg;
@@ -456,7 +460,6 @@
           --angle: 360deg;
         }
       }
-
 
       /* Interactive Elements */
       .show-more {
@@ -475,9 +478,34 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: var(--text);
         border: none;
         cursor: pointer;
+        color: var(--text);
+        background: none;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .theme-toggle:hover::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        z-index: -1;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      .theme-toggle:hover i {
+        color: var(--accent);
+        transition: color 0.3s;
       }
 
       @media (max-width: 768px) {
@@ -529,6 +557,7 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        
       }
 
       .contact-form {
@@ -601,7 +630,7 @@
       }
 
       /* Project Cards */
-      
+
       /* Category Filters */
       .project-filters {
         display: flex;
@@ -666,6 +695,7 @@
         color: var(--accent);
         text-decoration: none;
         font-size: 1rem;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .footer-icons {
@@ -685,6 +715,7 @@
         border-radius: 50%;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         transition: transform 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .footer-icons a:hover {
@@ -692,7 +723,7 @@
       }
 
       /*My education*/
-      
+
       .education-section {
         padding: 4rem 5%;
         display: flex;
@@ -752,7 +783,9 @@
           <i id="navicons" class="devicon-linkedin-plain"></i>
         </a>
 
-        <button class="theme-toggle"></button>
+        <button class="theme-toggle">
+          <i id="navicons" class="fa-solid fa-moon"></i>
+        </button>
       </div>
     </nav>
 
@@ -769,7 +802,9 @@
         <a href="https://www.linkedin.com/in/dhia-zorai/">
           <i id="naviconsmobile" class="devicon-linkedin-plain"></i>
         </a>
-        <button class="theme-toggle"></button>
+        <button class="theme-toggle">
+          <i id="naviconsmobile" class="fa-solid fa-moon"></i>
+        </button>
       </div>
     </nav>
 
@@ -1053,9 +1088,24 @@
 
       // Dark Mode Toggle
       const toggle = document.querySelectorAll(".theme-toggle");
+      function updateThemeIcon() {
+        toggle.forEach((btn) => {
+          const icon = btn.querySelector("i");
+          if (document.body.classList.contains("light-mode")) {
+            icon.classList.remove("fa-lightbulb");
+            icon.classList.add("fa-moon");
+            icon.title = "Switch to dark mode";
+          } else {
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-lightbulb");
+            icon.title = "Switch to light mode";
+          }
+        });
+      }
       toggle.forEach((btn) => {
         btn.addEventListener("click", () => {
           document.body.classList.toggle("light-mode");
+          updateThemeIcon();
           const currentTheme = document.body.classList.contains("light-mode")
             ? "light"
             : "dark";
@@ -1069,6 +1119,7 @@
         if (savedTheme === "light") {
           document.body.classList.add("light-mode");
         }
+        updateThemeIcon();
       });
 
       // Mobile Nav Blur Effect
@@ -1079,7 +1130,7 @@
 
       // Instant Load Optimizations
       document.addEventListener("DOMContentLoaded", () => {
-        // Lazy load non-critical resources
+        // Lazy load
         const styles = document.createElement("link");
         styles.rel = "stylesheet";
         styles.href = "fonts.css";
